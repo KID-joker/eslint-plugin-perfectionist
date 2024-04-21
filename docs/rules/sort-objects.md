@@ -87,6 +87,7 @@ interface Options {
   'custom-groups'?: { [key: string]: string[] | string }
   'styled-components'?: boolean
   'ignore-pattern'?: string[]
+  'ignore-function'?: { [key: string]: Function }
   'partition-by-comment'?: string[] | string | boolean
   'partition-by-new-line'?: boolean
 }
@@ -148,6 +149,30 @@ When `false`, this rule will be disabled for the styled-components like librarie
 If you need to ignore a rule for some interfaces, you can specify their names or a pattern to ignore, for example: `'Component*'` to ignore all interfaces whose names begin with the word Component.
 
 The [minimatch](https://github.com/isaacs/minimatch) library is used for pattern matching.
+
+### ignore-function
+
+<sub>(default: `{}`)</sub>
+
+Check for ignoring based on `node` and `filename`, and return a `boolean` value.
+
+Example:
+
+```
+{
+  "ignore-function": {
+    ignoreButtonStyles: (node: TSESTree.ObjectExpression | TSESTree.ObjectPattern, filename: string) => {
+      if (
+        node.parent.type === 'VariableDeclarator' &&
+        node.parent.id.type === 'Identifier'
+      ) {
+        return node.parent.id.name === 'buttonStyles'
+      }
+      return false
+    }
+  }
+}
+```
 
 ### partition-by-comment
 
