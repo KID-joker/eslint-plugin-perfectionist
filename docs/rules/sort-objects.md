@@ -87,7 +87,7 @@ interface Options {
   'custom-groups'?: { [key: string]: string[] | string }
   'styled-components'?: boolean
   'ignore-pattern'?: string[]
-  'ignore-function'?: { [key: string]: Function }
+  'custom-ignore'?: { [key: string]: Function }
   'partition-by-comment'?: string[] | string | boolean
   'partition-by-new-line'?: boolean
 }
@@ -150,7 +150,7 @@ If you need to ignore a rule for some interfaces, you can specify their names or
 
 The [minimatch](https://github.com/isaacs/minimatch) library is used for pattern matching.
 
-### ignore-function
+### custom-ignore
 
 <sub>(default: `{}`)</sub>
 
@@ -160,7 +160,7 @@ Example:
 
 ```
 {
-  "ignore-function": {
+  "custom-ignore": {
     ignoreButtonStyles: (node: TSESTree.ObjectExpression | TSESTree.ObjectPattern, filename: string) => {
       if (
         node.parent.type === 'VariableDeclarator' &&

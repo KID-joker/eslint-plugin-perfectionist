@@ -36,7 +36,7 @@ type SortingNodeWithPosition = SortingNode & {
 type Options = [
   Partial<{
     'custom-groups': { [key: string]: string[] | string }
-    'ignore-function': { [key: string]: Function }
+    'custom-ignore': { [key: string]: Function }
     'partition-by-comment': PartitionComment
     'partition-by-new-line': boolean
     groups: (string[] | string)[]
@@ -101,7 +101,7 @@ export default createEslintRule<Options, MESSAGE_ID>({
             },
             type: 'array',
           },
-          'ignore-function': {
+          'custom-ignore': {
             type: 'object',
           },
           groups: {
@@ -132,14 +132,14 @@ export default createEslintRule<Options, MESSAGE_ID>({
         'styled-components': true,
         'ignore-case': false,
         'ignore-pattern': [],
-        'ignore-function': {},
+        'custom-ignore': {},
         order: SortOrder.asc,
         'custom-groups': {},
         groups: [],
       })
 
       let shouldIgnore = false
-      let ignoreFunctions = Object.values(options['ignore-function'])
+      let ignoreFunctions = Object.values(options['custom-ignore'])
       if (
         ignoreFunctions.length &&
         ignoreFunctions.some(fn => fn(node, context.filename))

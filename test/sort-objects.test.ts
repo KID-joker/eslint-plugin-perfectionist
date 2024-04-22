@@ -2684,7 +2684,7 @@ describe(RULE_NAME, () => {
           `,
           options: [
             {
-              'ignore-function': {
+              'custom-ignore': {
                 ignoreButtonStyles: (node: TSESTree.ObjectExpression) => {
                   if (
                     node.parent.type === 'VariableDeclarator' &&
@@ -2773,7 +2773,7 @@ describe(RULE_NAME, () => {
           `,
           options: [
             {
-              'ignore-function': {
+              'custom-ignore': {
                 ignoreButtonStyles: () => false,
               },
             },
